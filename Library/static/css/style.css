@@ -1,0 +1,10 @@
+.header-button{
+	background-color: #1488D8; width:100px;
+	border:0;
+	transition-duration: 200ms;
+	transition-property: background-color;
+}
+
+.header-button:hover{
+	background-color: #030391;
+}

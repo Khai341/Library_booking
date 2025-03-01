@@ -1,0 +1,44 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+Admin page
+{% endblock %}
+
+{% block header %}
+<div style = "display: grid; height: 50px;
+	grid-template-columns: 80px 400px 1fr 200px;">
+	
+	{% load static %}
+	<img src="{% static 'logobachkhoasang.png' %}" alt="My image" style="height: 50px; width: auto;">
+
+	<div style=" display: grid; grid-template-columns: 200px 200px;">
+		
+		<button class = "header-button" style = "width:200px;">
+			View room history
+		</button>
+		<button class = "header-button" style = "width:200px;">
+			View user history
+		</button>
+		
+	</div>
+	
+	<div>
+	</div>
+	
+	<div style=" display: grid; grid-template-columns: 100px 100px;">
+		<button class = "header-button">
+			Chat box
+		</button>
+		<button class = "header-button">
+			Personal info
+		</button>
+	</div>
+</div
+{% endblock %}
+
+{% block content %}
+<h1>
+Admin page
+</h1>
+
+{% endblock %}
