@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        {% block title %}
+        Official Management
+        {% endblock %}
+    </title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <script src="{% static 'js/main.js' %}" defer></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            padding: 0;
+            margin: 0;
+        }
+
+        /* Full-Width Card Container */
+        .card-container {
+            width: 100%;
+            padding: 0 20px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .card {
+            width: 100%;
+            border-radius: 8px;
+            overflow: hidden;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .card img {
+            width: 300px;
+            height: 100%;
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+
+        .card-content {
+            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-content h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .card-content p {
+            font-size: 14px;
+            color: #555;
+        }
+
+        .people-dropdown {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            margin-top: 10px;
+            background-color: #f5f5f5;
+            font-size: 14px;
+            color: #333;
+            display: none;
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .people-dropdown li {
+            padding: 8px;
+            border-bottom: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body style="margin:0; display: flex; flex-direction: column; min-height: 100vh;">
+    <nav>
+        <div style="background-color: #1488D8; color: white; position: fixed; top: 0; left: 0; right: 0; height: 50px;">
+            {% block header %}
+            <div style="display: grid; height: 50px; grid-template-columns: 80px 20px 200px;">
+                <img src="{% static 'logobachkhoasang.png' %}" alt="Logo" style="height: 50px; width: auto;">
+                <div></div>
+                <div style="background-color: #1488D8; display: flex; justify-content: flex-start; align-items: center; padding-left: 20px; gap: 50px;">
+                    
+                    <!-- Search for Rooms -->
+                    <form method="get" style="display: flex; align-items: center; gap: 5px; margin: 0;">
+                        <input type="text" name="q_room" placeholder="Search rooms by ID..." value="{{ query_room|default:'' }}" style="padding: 5px 15px">
+                        <button type="submit" style="background-color: #2200ff; color: white; padding: 8px 50px; border: none; border-radius: 5px;">Search</button>
+                    </form>
+    
+                    <!-- Search for Students -->
+                    <form method="get" style="display: flex; align-items: center; gap: 5px; margin: 0;">
+                        <input type="text" name="q_student" placeholder="Search students by ID..." value="{{ query_student|default:'' }}" style="padding: 5px 15px">
+                        <button type="submit" style="background-color: #2200ff; color: white; padding: 8px 50px; border: none; border-radius: 5px;">Search</button>
+                    </form>
+                </div>
+            </div>
+            {% endblock %}
+        </div>
+    </nav>
+    
+    <main style="margin-top: 50px; flex: 1;">
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <div class="card-container">
+        {% if query_room %}
+            {% for room in rooms %}
+                <div class="card" onclick="togglePeopleDropdown('{{ room.id_number }}')">
+                    {% if room.image %}
+                        <img src="{{ room.image.url }}" alt="{{ room.id_number }}">
+                    {% endif %}
+                    <div class="card-content">
+                        <h2><strong>Room ID:</strong> {{ room.id_number }}</h2>
+                        <p><strong>Status:</strong> {{ room.status }}</p>
+                    </div>
+
+                    <!-- Dropdown list of people who have used the room and the dates -->
+                    <ul id="people-dropdown-{{ room.id_number }}" class="people-dropdown">
+                        {% for occupation in room.roomoccupation_set.all %}
+                            <li>
+                                <strong>{{ occupation.student.name }} ({{occupation.student.id_number}})</strong> ({{ occupation.student.email }}) 
+                                <span>- Occupied on {{ occupation.occupied_on|date:"F d, Y H:i" }}</span>
+                            </li>
+                        {% empty %}
+                            <li>No one has occupied this room before.</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% empty %}
+                <p>No rooms found.</p>
+            {% endfor %}
+        {% endif %}
+
+        {% if query_student %}
+            {% for student in students %}
+                <div class="card">
+                    {% if student.image %}
+                        <img src="{{ student.image.url }}" alt="{{ student.id_number }}">
+                    {% endif %}
+                    <div class="card-content">
+                        <h2><strong>Student ID:</strong> {{ student.id_number }}</h2>
+                        <p><strong>Name:</strong> {{ student.name }}</p>
+                        <p><strong>Email:</strong> {{ student.email }}</p>
+                    </div>
+                </div>
+            {% empty %}
+                <p>No students found.</p>
+            {% endfor %}
+        {% endif %}
+    </div>
+
+    <script>
+        function togglePeopleDropdown(roomId) {
+            const dropdown = document.getElementById(`people-dropdown-${roomId}`);
+            if (dropdown.style.display === 'none' || dropdown.style.display === '') {
+                dropdown.style.display = 'block'; // Show the dropdown
+            } else {
+                dropdown.style.display = 'none'; // Hide the dropdown
+            }
+        }
+    </script>
+
+    <div style="display: grid; height: 50px; grid-template-columns: 1fr; margin:0;">
+        <div style="background-color: #1488D8;color: white;">Copyrighted</div>
+    </div>
+</body>
+</html>
