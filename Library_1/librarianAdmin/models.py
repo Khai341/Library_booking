@@ -11,6 +11,13 @@ class Users (AbstractUser):
     ]
     status = models.CharField(max_length=1, choices=STATUS_CHOICES, default='G')
     
+    id_number = models.CharField(max_length=100, unique=True)
+    name = models.CharField(max_length=100)
+    email = models.EmailField(unique=True)
+    image = models.ImageField(upload_to='students/', null=True, blank=True)
+
+    def __str__(self):
+        return self.id_number
     # pass = admin
 class BookingHistory (models.Model):
     roomID = models.CharField(max_length=10)
