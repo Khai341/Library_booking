@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        {% block title %}
+		Not log in page
+        {% endblock %}
+    </title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <script src="{% static 'js/main.js' %}" defer></script>
+</head>
+<body style = "margin:0;
+			display: flex;
+            flex-direction: column;
+            min-height: 100vh;">
+    <nav> <!-- https://hcmut.edu.vn/gioi-thieu/nhan-dien-thuong-hieu #1488D8  #030391;-->
+		<div style = "
+			background-color: #1488D8;
+			color: white;
+			position:fixed;
+			top: 0;
+			left: 0;
+			right: 0;
+			height: 50px;
+			
+
+		">
+		
+		
+		{% block header %}
+		<div style = "display: grid; height: 50px;
+			grid-template-columns: 80px 1fr 200px;">
+			<img src="{% static 'logobachkhoasang.png' %}" alt="My image" style="height: 50px; width: auto;">
+			<div>
+			</div>
+			<div style="background-color: #1488D8; display: grid; grid-template-columns: 100px 100px;">
+				
+				<button class = "header-button">
+					Login
+				</button>
+				<button class = "header-button">
+					Register
+				</button>
+				
+			</div>
+		</div>	
+		{% endblock %}	
+			
+		</div>
+    </nav>
+    <main style = "margin-top: 50px;  flex: 1;">
+        {% block content %}
+		
+        {% endblock %}
+		
+		
+    </main>
+	
+	<div style = "display: grid; height: 50px;
+			grid-template-columns: 1fr; margin:0;">
+	
+	<div style = "background-color: #1488D8;color: white;">
+	Copyrighted
+	</div>
+	
+	</div>
+</body>
+</html>
