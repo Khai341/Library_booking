@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'libofficial',
     'general',
     'official',
+    'accounts',
 ]
 
 MIDDLEWARE = [
@@ -58,7 +59,7 @@ ROOT_URLCONF = 'Library.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['templates'],
+        'DIRS': [BASE_DIR/'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -134,3 +135,7 @@ STATICFILES_DIRS = [ ###https://docs.djangoproject.com/en/5.1/howto/static-files
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = "librarianAdmin.Users" ###
+
+LOGIN_REDIRECT_URL = 'homepage'
+
+LOGOUT_REDIRECT_URL = 'homepage'
