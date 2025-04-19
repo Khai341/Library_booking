@@ -4,5 +4,10 @@ from . import views
 app_name = 'librarianAdmin'
 
 urlpatterns = [
-    path('', views.ReturnMain),
+    path('booking-history/', views.booking_history, name='booking_history'),
+    path('', views.return_main),
+    path('booking-detail/<int:booking_id>/', views.booking_detail, name='booking_detail'),  # ← comma added here
+    path('cancel-booking/<int:booking_id>/', views.cancel_booking, name='cancel_booking'),
+    path('send-invitation/<int:booking_id>/', views.send_invitation, name='send_invitation'),
+    path('rebook/<int:booking_id>/', views.rebook, name='rebook'),
 ]

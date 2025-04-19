@@ -1,0 +1,63 @@
+<!-- templates/booking/booking_detail.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Booking Detail</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 30px;
+    }
+    .detail-box {
+      border: 1px solid #ccc;
+      padding: 20px;
+      border-radius: 10px;
+      max-width: 600px;
+      margin: auto;
+      background: #f9f9f9;
+    }
+    .detail-box h1 {
+      margin-bottom: 20px;
+    }
+    .detail-box p {
+      margin: 10px 0;
+    }
+    .back-link {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: #0057B8;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+    }
+    .back-link:hover {
+      background-color: #003e8a;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="detail-box">
+    <h1>Booking Detail</h1>
+
+    <p><strong>Booking ID:</strong> {{ booking.id }}</p>
+
+    <p><strong>Room:</strong> {{ booking.roomID|default:"(not specified)" }}</p>
+
+    <p><strong>Location:</strong> {{ booking.location|default:"(not specified)" }}</p>
+
+    <p><strong>Date:</strong>
+      {{ booking.date|date:"F j, Y - g:i A"|default:"(no date set)" }}
+    </p>
+
+    <p><strong>Time Slot:</strong> {{ booking.time_slot|default:"(no slot chosen)" }}</p>
+
+    <a href="{% url 'librarianAdmin:booking_history' %}" class="back-link">
+      Back to Booking History
+    </a>
+  </div>
+
+</body>
+</html>
