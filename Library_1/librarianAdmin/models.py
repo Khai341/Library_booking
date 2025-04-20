@@ -29,6 +29,7 @@ class BookingHistory(models.Model):
         blank=True  # allow it to be blank until auto-generated
     )
     date = models.DateTimeField(auto_now_add=True)
+    date_booking = models.DateTimeField(default = '2025-01-01')
     # Many-to-Many relationship: one booking can involve multiple users, and each user can have multiple bookings.
     person = models.ManyToManyField(Users, related_name='book')
     
