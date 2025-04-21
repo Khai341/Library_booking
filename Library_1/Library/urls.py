@@ -23,9 +23,10 @@ from . import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.homepage, name='homepage'),
-    path('libadmin/', include('librarianAdmin.urls')),
+    path('book/new/', include('general.urls')),
+    path('book/', include('librarianAdmin.urls')),
     path('libofficial/', include('libofficial.urls')),
-    path('general/', include('general.urls')),
+    #path('general/', include('general.urls')),
     path('official/', include('official.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
     path('accounts/register/', register, name='register'),
