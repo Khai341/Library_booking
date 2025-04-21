@@ -42,7 +42,7 @@ def send_invitation(request, booking_id):
             invitee_email=invitee_email
         )
         #return redirect('booking_history')
-        return redirect('/libadmin/booking-history')
+        return redirect('/book/booking-history')
     return render(request, 'booking/send_invitation.html', {'booking': booking})
 
 @login_required
@@ -69,4 +69,4 @@ def cancel_booking(request, booking_id):
     if request.user in booking.person.all():
         booking.is_cancelled = True
         booking.save()
-    return redirect('/libadmin/booking-history')
+    return redirect('/book/booking-history')

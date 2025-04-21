@@ -23,7 +23,7 @@ def Booking(request):
             slug=f"{Room_ID_booking}-{'08:00–09:00'}-{timezone.now().strftime('%Y%m%d%H%M%S')}"
             )
             booking_history.person.add(request.user)
-            return redirect('/libadmin/booking-history/')
+            return redirect('/book/booking-history/')
     return render(request, 'general_booking.html')
     
     
