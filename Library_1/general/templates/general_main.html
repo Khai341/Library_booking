@@ -6,32 +6,36 @@ General user page
 
 {% block header %}
 <div style = "display: grid; height: 50px;
-	grid-template-columns: 80px 400px 1fr 200px;">
+	grid-template-columns: 80px 400px 1fr 100px;">
 	
 	{% load static %}
 	<img src="{% static 'logobachkhoasang.png' %}" alt="My image" style="height: 50px; width: auto;">
 
 	<div style=" display: grid; grid-template-columns: 200px 200px;">
 		
-		<button class = "header-button" style = "width:200px;">
+		<a href="/book/new"  class = "header-button" style = "width:200px;margin:0;padding:12px 50px 10px 50px; text-decoration: none;">
 			Find room
-		</button>
-		<button class = "header-button" style = "width:200px;">
+		</a>
+		<a href="/book/booking-history"  class = "header-button" style = "width:200px;margin:0;padding:12px 50px 10px 50px; text-decoration: none;">
 			Booking history
-		</button>
+		</a>
 		
 	</div>
 	
 	<div>
 	</div>
 	
-	<div style=" display: grid; grid-template-columns: 100px 100px;">
-		<button class = "header-button">
+	<div style=" display: grid; grid-template-columns: 100px;">
+	<!--	<button class = "header-button">
 			Chat box
 		</button>
 		<button class = "header-button">
 			Personal info
 		</button>
+		-->
+		<a href="/accounts/logout"  class = "header-button" style = "width:200px;margin:0;padding:12px 50px 10px 25px; text-decoration: none;">
+			Logout
+		</a>
 	</div>
 </div
 {% endblock %}
