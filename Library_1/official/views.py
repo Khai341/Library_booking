@@ -1,8 +1,16 @@
 from django.shortcuts import render
 from .models import Room, Student
 from librarianAdmin.models import Users
+
+from django.http import HttpResponse
 # Create your views here.
 def official_list(request):
+
+    if request.user.is_authenticated and hasattr(request.user, 'status'):
+        if request.user.status == 'G':
+            return HttpResponse("NOT allowed")
+    else:
+        return HttpResponse("NOT allowed")
     query_room = request.GET.get('q_room', '')
     query_student = request.GET.get('q_student', '')
 
