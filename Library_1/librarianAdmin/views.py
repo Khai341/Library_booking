@@ -7,7 +7,8 @@ from django.utils import timezone
 from django.http import HttpResponse
 # Main page view
 def return_main(request):
-    return render(request, 'librarianAdmin_main.html')
+    #return render(request, 'librarianAdmin_main.html')
+    return render(request, 'general_main.html')
 
 # Booking history view
 @login_required
