@@ -3,10 +3,15 @@ import os
 from django.http import JsonResponse
 from librarianAdmin.models import BookingHistory
 from django.utils import timezone
+from django.contrib.auth.decorators import login_required
 # Create your views here.
+
+
+@login_required
 def ReturnMain(request):
     return render(request, 'general_main.html')
 
+@login_required
 def Booking(request):
     if request.method == 'POST':
         Location_booking = request.POST.get('Location_booking')
@@ -27,7 +32,7 @@ def Booking(request):
     return render(request, 'general_booking.html')
     
     
-    
+@login_required    
 def Ajax0 (request):
     #return render(request, 'main.html')
     user_input = request.POST.get("userInput", "")
@@ -36,12 +41,12 @@ def Ajax0 (request):
     if user_input == "CS2":
         return render(request, 'map2.html')
     return #need a fallback
-    
+@login_required   
 def Ajax1 (request):
     return JsonResponse({"message": f"056"}) 
-    
+@login_required    
 def Ajax2 (request):
     return JsonResponse({"message": f"056"})
-    
+@login_required    
 def save_new_booking(request, Location, Date, Room, Time):
     return render(request, 'general_booking.html')
