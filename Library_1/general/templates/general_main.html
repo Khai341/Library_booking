@@ -6,12 +6,14 @@ General user page
 
 {% block header %}
 <div style = "display: grid; height: 50px;
-	grid-template-columns: 80px 400px 1fr 100px;">
+	grid-template-columns: 80px 600px 1fr 100px;">
 	
 	{% load static %}
 	<a  href="/" style="height: 50px; width: auto;">
 	<img src="{% static 'logobachkhoasang.png' %}" alt="My image" style="height: 50px; width: auto;"></a>
 
+
+	{% if user.status == 'G' %}
 	<div style=" display: grid; grid-template-columns: 200px 200px;">
 		
 		<a href="/book/new"  class = "header-button" style = "width:200px;margin:0;padding:12px 50px 10px 50px; text-decoration: none;">
@@ -22,7 +24,20 @@ General user page
 		</a>
 		
 	</div>
-	
+	{% else %}
+	<div style=" display: grid; grid-template-columns: 200px 200px 200px;">
+		
+		<a href="/book/new"  class = "header-button" style = "width:200px;margin:0;padding:12px 50px 10px 50px; text-decoration: none;">
+			Find rooms
+		</a>
+		<a href="/book/booking-history"  class = "header-button" style = "width:200px;margin:0;padding:12px 50px 10px 50px; text-decoration: none;">
+			Booking history
+		</a>
+		<a href="/official/"  class = "header-button" style = "width:200px;margin:0;padding:12px 50px 10px 50px; text-decoration: none;">
+			Librarian
+		</a>
+	</div>
+	{% endif %}
 	<div>
 	</div>
 	
