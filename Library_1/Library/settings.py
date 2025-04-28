@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'daphne',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -42,6 +43,8 @@ INSTALLED_APPS = [
     'general',
     'official',
     'accounts',
+    'channels',
+    'chat_section',
 ]
 
 MIDDLEWARE = [
@@ -73,7 +76,12 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'Library.wsgi.application'
-
+ASGI_APPLICATION = 'Library.asgi.application'        # point to your new ASGI module
+CHANNEL_LAYERS = {
+  "default": {
+    "BACKEND": "channels.layers.InMemoryChannelLayer"
+  },
+}
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases

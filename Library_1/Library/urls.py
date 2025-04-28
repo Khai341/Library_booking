@@ -31,4 +31,5 @@ urlpatterns = [
     path('accounts/', include('django.contrib.auth.urls')),
     path('accounts/register/', register, name='register'),
     path('accounts/logout', custom_logout, name='logout'),
+    path('chat/', include('chat_section.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
