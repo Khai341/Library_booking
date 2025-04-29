@@ -12,8 +12,10 @@
   <h2>Send Invitation for Booking: {{ booking.roomID }} on {{ booking.date|date:"Y-m-d" }}</h2>
   <form action="" method="post">
     {% csrf_token %}
-    <label for="invitee_email">Invitee Email:</label>
-    <input type="email" name="invitee_email" id="invitee_email" required>
+    <!--<label for="invitee_username">Invitee Username:</label>-->
+    <!--<input type="email" name="invitee_email" id="invitee_email" required>-->
+	<label for="invitee_username">Invitee Username:</label>
+    <input type="text" name="invitee_username" id="invitee_username" required>
     <button type="submit">Send Invitation</button>
   </form>
 </body>

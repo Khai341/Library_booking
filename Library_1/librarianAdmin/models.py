@@ -64,7 +64,8 @@ class BookingHistory(models.Model):
 class Invitation(models.Model):
     booking = models.ForeignKey(BookingHistory, on_delete=models.CASCADE, related_name='invitations')
     inviter = models.ForeignKey(Users, on_delete=models.CASCADE, related_name='sent_invitations')
-    invitee_email = models.EmailField()
+    invitee_email = models.EmailField(default='NG')
+    invitee_username = models.CharField(max_length=20, default='NG')
     status = models.CharField(max_length=20, default='Pending')
     created_at = models.DateTimeField(auto_now_add=True)
     
