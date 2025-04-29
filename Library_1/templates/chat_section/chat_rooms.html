@@ -1,3 +1,7 @@
+{% extends 'general_main.html' %}
+{% block content %}
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,6 +28,7 @@
             position: fixed;
             top: 0;
             left: 0;
+			z-index:1;
         }
 
         .sidebar h3 {
@@ -140,7 +145,7 @@
 <body>
 
     <!-- Sidebar -->
-    <div class="sidebar">
+    <div class="sidebar" style = "margin-top: 50px;">
         <h3>Rooms</h3>
         {% for r in all_rooms %}
             {% if r.number == current_number %}
@@ -251,7 +256,7 @@
 </body>
 </html>
 
-
+{% endblock %}
 
 
 
