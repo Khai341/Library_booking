@@ -74,3 +74,25 @@ def cancel_booking(request, booking_id):
         booking.is_cancelled = True
         booking.save()
     return redirect('/book/booking-history')
+
+
+@login_required
+def delete_invitation(request, datetime_str):
+    # Allows user to send an invitation for a specific booking.
+    invitation = Invitation.objects.filter(invitee_username=request.user.username,created_at=datetime_str)
+    if invitation != None:   
+        invitation.delete()
+    return redirect('/book/booking-history')
+    
+    
+    
+@login_required
+def accept_invitation(request, datetime_str):
+    # Allows user to send an invitation for a specific booking.
+    invitation = Invitation.objects.filter(invitee_username=request.user.username,created_at=datetime_str)
+    if invitation != None:  
+        invitation = invitation.first()
+        my_book = invitation.booking
+        my_book.person.add(request.user)
+        invitation.delete()
+    return redirect('/book/booking-history')

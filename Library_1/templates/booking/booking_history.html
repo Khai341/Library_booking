@@ -63,7 +63,15 @@
       <p><strong>Time Slot:</strong> {{ invite.booking.time_slot|default:"(no time slot)" }}</p>
 
       <div class="booking-buttons">
-        
+	  
+		<a href="{% url 'librarianAdmin:accept_invitation' invite.created_at %}" class="btn btn-warning" style = "background-color: #FFFF00; padding: 10px 24px;text-decoration: none;">
+          Accept invitation
+        </a>
+		
+        <a href="{% url 'librarianAdmin:delete_invitation' invite.created_at %}" class="btn btn-secondary" style = "background-color: #e7e7e7; color: black; padding: 10px 24px;text-decoration: none;">
+          Deny invitation
+        </a>
+		
       </div>
     </div>
   </div>
