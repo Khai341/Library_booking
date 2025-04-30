@@ -43,10 +43,18 @@ def Ajax0 (request):
     return #need a fallback
 @login_required   
 def Ajax1 (request):
-    return JsonResponse({"message": f"056"}) 
+    user_booking = request.POST.get("user_booking", "")
+    user_date = request.POST.get("user_date", "")
+    booking = BookingHistory.objects.filter(date_booking=user_date,is_cancelled=False,roomID=user_booking)
+    my_str = ""
+    for book in booking:
+        my_str += book.time_slot
+        my_str += "|"
+    return JsonResponse({"message": my_str}) 
+    #return JsonResponse({"message": "08:00–09:00|09:00–10:00"}) 
 @login_required    
 def Ajax2 (request):
-    return JsonResponse({"message": f"056"})
+    return JsonResponse({"message": f"08:00–09:00"})
 @login_required    
 def save_new_booking(request, Location, Date, Room, Time):
     return render(request, 'general_booking.html')

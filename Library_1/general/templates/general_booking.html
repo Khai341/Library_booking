@@ -154,18 +154,25 @@ button {
 			document.getElementById("Room_ID_booking").value = this.id;
 			
 			
-			let userInput = 0;
+			//let userInput = 0;
+			let user_booking = this.id;
+			console.log(typeof user_booking);
+			let user_date = document.getElementById("Date_booking").value;
+			console.log("date booking: ",user_date);
+			console.log("user_booking:",user_booking);
 			$.ajax({
 				url: "Ajax1",
 				method: "POST",
 				data: {
-					userInput: userInput,
+					user_booking: user_booking,
+					user_date: user_date,
 					csrfmiddlewaretoken: '{{ csrf_token }}'  // Include CSRF token
 				},
 				success: function(response) {
 					console.log('summit ok');
 					let input = response.message;
 					console.log(input);
+					/*
 					console.log(typeof input);
 					for (let i=0;i<input.length;i++){
 						let temp = 't' + input[i];
@@ -174,7 +181,13 @@ button {
 						$(Element).css('fill', 'red');
 
 						//console.log ($(Element).css('fill') == "rgb(255, 0, 0)")
+					}*/
+					temp_arr = input.split("|")
+					for (let i=0;i<temp_arr.length;i++){
+						let Element = document.getElementById(temp_arr[i]);
+						$(Element).css('fill', 'red');
 					}
+					
 				},
 				error: function() {
 					// Handle errors

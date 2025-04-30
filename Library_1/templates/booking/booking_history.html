@@ -59,7 +59,7 @@
         <p><strong>Status:</strong> Upcoming</p>
       {% endif %}
 
-      <p><strong>Date:</strong> {{ invite.booking.date|date:"F j, Y - g:i A"|default:"(no date)" }}</p>
+      <p><strong>Date:</strong> {{ invite.booking.date_booking|date:"F j, Y "|default:"(no date)" }}</p>
       <p><strong>Time Slot:</strong> {{ invite.booking.time_slot|default:"(no time slot)" }}</p>
 
       <div class="booking-buttons">
@@ -105,7 +105,7 @@
         <p><strong>Status:</strong> Upcoming</p>
       {% endif %}
 
-      <p><strong>Date:</strong> {{ booking.date|date:"F j, Y - g:i A"|default:"(no date)" }}</p>
+      <p><strong>Date:</strong> {{ booking.date_booking|date:"F j, Y "|default:"(no date)" }}</p>
       <p><strong>Time Slot:</strong> {{ booking.time_slot|default:"(no time slot)" }}</p>
 
       <div class="booking-buttons">
