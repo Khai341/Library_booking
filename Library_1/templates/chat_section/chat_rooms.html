@@ -146,6 +146,13 @@
 
     <!-- Sidebar -->
     <div class="sidebar" style = "margin-top: 50px;">
+		<form method="POST" action="">
+		{% csrf_token %}
+		<input id="add-room-input" name="add-room-input" type="text" placeholder="New room" >
+		<button id="add-room-submit"type="submit">Send</button>
+		</form>
+				
+				
         <h3>Rooms</h3>
         {% for r in all_rooms %}
             {% if r.number == current_number %}
@@ -173,7 +180,13 @@
             <div class="chat-header">
                 Chat Room: {{ room.name }}
             </div>
-
+			<div class="room-info">
+				<form method="POST" action="">
+				{% csrf_token %}
+                <input id="add-user-input" name="add-user-input" type="text" placeholder="New user by enter username" >
+                <button id="add-user-submit"type="submit">Send</button>
+				</form>
+            </div>
             <div class="room-info">
                 Room #{{ room.number }} |
                 Users: {{ room.users.count|default:"0" }} online
@@ -193,6 +206,8 @@
                 <input id="chat-message-input" type="text" placeholder="Type your message here...">
                 <button id="chat-message-submit">Send</button>
             </div>
+
+			
         </div>
     </div>
 	{% endif %}

@@ -25,6 +25,23 @@ def chat_rooms_redirect(request):
 def chat_rooms(request, number):
     all_rooms = Room.objects.filter(users=request.user).order_by('number')
     room = Room.objects.filter(users=request.user,number=number).first()
+    if request.method == 'POST':
+        add_user = request.POST.get('add-user-input')
+        add_room = request.POST.get('add-room-input')
+        
+        
+        user = Users.objects.filter(username=add_user).first()
+        if user!=None and room !=None:
+            room.users.add(user)
+        if add_room != None:
+            latest_room = Room.objects.order_by('-number').first()
+            next_number = latest_room.number + 1 if latest_room else 1
+            room = Room.objects.create(
+                number = next_number,
+                name = add_room
+            )
+            room.users.add(request.user)
+        return redirect(f'/chat/{number}/')
     message = None
     if room:
         message = Message.objects.filter(room=room)
