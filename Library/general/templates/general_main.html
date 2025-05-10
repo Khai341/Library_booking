@@ -1,0 +1,70 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+General user page
+{% endblock %}
+
+{% block header %}
+<div style = "display: grid; height: 50px;
+	grid-template-columns: 80px 600px 1fr 200px;">
+	
+	{% load static %}
+	<a  href="/" style="height: 50px; width: auto;">
+	<img src="{% static 'logobachkhoasang.png' %}" alt="My image" style="height: 50px; width: auto;"></a>
+
+
+	{% if user.status == 'G' %}
+	<div style=" display: grid; grid-template-columns: 200px 200px;">
+		
+		<a href="/book/new"  class = "header-button" style = "width:200px;margin:0;padding:12px 50px 10px 50px; text-decoration: none;">
+			Find room
+		</a>
+		<a href="/book/booking-history"  class = "header-button" style = "width:200px;margin:0;padding:12px 50px 10px 50px; text-decoration: none;">
+			Booking history
+		</a>
+		
+	</div>
+	{% else %}
+	<div style=" display: grid; grid-template-columns: 200px 200px 200px;">
+		
+		<a href="/book/new"  class = "header-button" style = "width:200px;margin:0;padding:12px 50px 10px 50px; text-decoration: none;">
+			Find rooms
+		</a>
+		<a href="/book/booking-history"  class = "header-button" style = "width:200px;margin:0;padding:12px 50px 10px 50px; text-decoration: none;">
+			Booking history
+		</a>
+		<a href="/official/"  class = "header-button" style = "width:200px;margin:0;padding:12px 50px 10px 50px; text-decoration: none;">
+			Librarian
+		</a>
+	</div>
+	{% endif %}
+	<div>
+	</div>
+	
+	<div style=" display: grid; grid-template-columns: 100px 100px;">
+	<!--	<button class = "header-button">
+			Chat box
+		</button>
+		<button class = "header-button">
+			Personal info
+		</button>
+		-->
+		<a href="/chat/0"  class = "header-button" style = "width:50px;margin:0;padding:12px 50px 10px 25px; text-decoration: none;">
+			Chat
+		</a>
+		<a href="/accounts/logout"  class = "header-button" style = "width:50px;margin:0;padding:12px 50px 10px 25px; text-decoration: none;">
+			Logout
+		</a>
+	</div>
+</div
+{% endblock %}
+
+
+{% comment %}
+{% block content %}
+<h1>
+General user page
+</h1>
+
+{% endblock %}
+{% endcomment %}
