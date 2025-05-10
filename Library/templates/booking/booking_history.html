@@ -1,0 +1,137 @@
+{% extends 'general_main.html' %}
+{% block content %}
+<!-- templates/booking/booking_history.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>My Booking History</title>
+  <!--<link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+  >-->
+  <style>
+    .booking-card {
+      display: flex;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      overflow: hidden;
+      background-color: #fff;
+    }
+    .booking-image {
+      width: 200px;
+      height: 150px;
+      object-fit: cover;
+      background-color: #f0f0f0;
+    }
+    .booking-details {
+      flex: 1;
+      padding: 15px;
+    }
+    .booking-buttons {
+      margin-top: 15px;
+    }
+    .booking-buttons a,
+    .booking-buttons button {
+      margin-right: 10px;
+    }
+  </style>
+</head>
+<body class="p-4 bg-light">
+  <h2 class="mb-4">My Booking invitations</h2>
+  {% for invite in invitation %}
+  <div class="booking-card">
+    <img
+      src="https://via.placeholder.com/200x150?text=Room+{{ booking.roomID|default:'N/A' }}"
+      alt="Room {{ booking.roomID|default:'N/A' }}"
+      class="booking-image"
+    >
+    <div class="booking-details" style = "padding-top:0px;">
+		<p><strong>Invitation is sent by:</strong> {{ invite.inviter|default:"(no time slot)" }}</p>
+      <h3 style="margin:0px;">Booking #{{ invite.booking.id }}</h3>
+      <p><strong>Room:</strong> {{ invite.booking.roomID|default:"(no room)" }}</p>
+      <p><strong>Location:</strong> {{ invite.booking.location|default:"(no location)" }}</p>
+
+      {% if invite.booking.is_cancelled %}
+        <p><strong>Status:</strong> Cancelled</p>
+      {% else %}
+        <p><strong>Status:</strong> Upcoming</p>
+      {% endif %}
+
+      <p><strong>Date:</strong> {{ invite.booking.date_booking|date:"F j, Y "|default:"(no date)" }}</p>
+      <p><strong>Time Slot:</strong> {{ invite.booking.time_slot|default:"(no time slot)" }}</p>
+
+      <div class="booking-buttons">
+	  
+		<a href="{% url 'librarianAdmin:accept_invitation' invite.created_at %}" class="btn btn-warning" style = "background-color: #FFFF00; padding: 10px 24px;text-decoration: none;">
+          Accept invitation
+        </a>
+		
+        <a href="{% url 'librarianAdmin:delete_invitation' invite.created_at %}" class="btn btn-secondary" style = "background-color: #e7e7e7; color: black; padding: 10px 24px;text-decoration: none;">
+          Deny invitation
+        </a>
+		
+      </div>
+    </div>
+  </div>
+  
+  <!--
+  <p><strong>inviter:</strong> {{ invite.inviter|default:"(no time slot)" }}</p>
+  <p><strong>Room:</strong> {{ invite.booking.roomID|default:"(no room)" }}</p>
+  <p><strong>Location:</strong> {{ invite.booking.location|default:"(no location)" }}</p>
+  -->
+  {% empty %}
+    <div class="alert alert-info">You haven't made any bookings yet.</div>
+  {% endfor %}
+  <br></br>
+  <h2 class="mb-4">My Booking History</h2>
+
+  {% for booking in bookings %}
+  <div class="booking-card">
+    <img
+      src="https://via.placeholder.com/200x150?text=Room+{{ booking.roomID|default:'N/A' }}"
+      alt="Room {{ booking.roomID|default:'N/A' }}"
+      class="booking-image"
+    >
+    <div class="booking-details" style = "padding-top:0px;">
+      <h3 style="margin:0px;">Booking #{{ booking.id }}</h3>
+      <p><strong>Room:</strong> {{ booking.roomID|default:"(no room)" }}</p>
+      <p><strong>Location:</strong> {{ booking.location|default:"(no location)" }}</p>
+
+      {% if booking.is_cancelled %}
+        <p><strong>Status:</strong> Cancelled</p>
+      {% else %}
+        <p><strong>Status:</strong> Upcoming</p>
+      {% endif %}
+
+      <p><strong>Date:</strong> {{ booking.date_booking|date:"F j, Y "|default:"(no date)" }}</p>
+      <p><strong>Time Slot:</strong> {{ booking.time_slot|default:"(no time slot)" }}</p>
+
+      <div class="booking-buttons">
+        <!--<a href="{% url 'librarianAdmin:booking_detail' booking.id %}" class="btn btn-primary">
+          View Detail
+        </a>-->
+        <a href="{% url 'librarianAdmin:send_invitation' booking.id %}" class="btn btn-warning" style = "background-color: #FFFF00; padding: 10px 24px;text-decoration: none;">
+          Invite
+        </a>
+        <!--<a href="{% url 'librarianAdmin:rebook' booking.id %}" class="btn btn-secondary">
+          Rebook
+        </a>-->
+		<a href="{% url 'librarianAdmin:cancel_booking' booking.id %}" class="btn btn-secondary" style = "background-color: #e7e7e7; color: black; padding: 10px 24px;text-decoration: none;">
+          Cancel booking
+        </a>
+      </div>
+    </div>
+  </div>
+  {% empty %}
+    <div class="alert alert-info">You haven't made any bookings yet.</div>
+  {% endfor %}
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+
+
+
+{% endblock %}
